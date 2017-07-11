@@ -1,7 +1,6 @@
 package com.formation.appli.mypocketbride;
 
 import android.location.*;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +15,6 @@ import com.formation.appli.mypocketbride.DB.DAO.InteractDAO;
 import com.formation.appli.mypocketbride.DB.DAO.LocationDAO;
 import com.formation.appli.mypocketbride.DB.DAO.UserDAO;
 import com.formation.appli.mypocketbride.GPS.Position;
-import com.formation.appli.mypocketbride.Geocodage.RequestGeocodage;
 
 import java.util.List;
 import java.util.Locale;
@@ -182,7 +180,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         addressDao.close();
         //endregion
         int homeId=home.getId();
-        Location locationH=new Location(1,userID,homeId);
+        UserLocation locationH=new UserLocation(1,userID,homeId);
         //region DB usage
         LocationDAO locationHome = new LocationDAO(this);
         locationHome.openWritable();
@@ -198,7 +196,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         addressWDao.close();
         //endregion
         int workId=work.getId();
-        Location locationW=new Location(2,userID,workId);
+        UserLocation locationW=new UserLocation(2,userID,workId);
         //region DB usage
         LocationDAO locationWork = new LocationDAO(this);
         locationWork.openWritable();

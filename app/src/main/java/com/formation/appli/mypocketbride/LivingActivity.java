@@ -6,18 +6,15 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 
-
+import com.formation.appli.mypocketbride.DB.DAO.AddressDAO;
+import com.formation.appli.mypocketbride.DB.DAO.LocationDAO;
 import com.formation.appli.mypocketbride.GPS.Localisation;
 import com.formation.appli.mypocketbride.GPS.Position;
 
@@ -68,7 +65,15 @@ public class LivingActivity extends AppCompatActivity implements Localisation.IL
         latitude=position.getY();
         lati.setText(String.valueOf(latitude));
         longi.setText(String.valueOf(longitude));
-       /* if(latitude==work.getlatitude()&&longitude==work.getLongitude()){
+       /*
+       int userid=user.getId();
+       loadHomeLocation(userId);
+       //TODO
+       int addresId=location.getAddressId();
+       loadAddress(addressId);
+
+
+       if(latitude==work.getlatitude()&&longitude==work.getLongitude()){
             NotificationCompat.Builder mBuilder= new NotificationCompat.Builder(this);
             mBuilder.setSmallIcon(R.drawable.hm_logo);
             mBuilder.setContentTitle(hatsune.getName());
@@ -105,5 +110,26 @@ public class LivingActivity extends AppCompatActivity implements Localisation.IL
 
 
         }
+    }
+    private UserLocation[] loadHomeLocation(int userId) {
+        LocationDAO dao = new LocationDAO(this);
+        dao.openReadable();
+        UserLocation[] location = dao.getAllHomeFromUser(userId);
+        dao.close();
+        return location;
+    }
+    private UserLocation[] loadWorkLocation(int userId) {
+        LocationDAO dao = new LocationDAO(this);
+        dao.openReadable();
+        UserLocation[] location = dao.getAllWorkFromUser(userId);
+        dao.close();
+        return location;
+    }
+    private Address[] loadAddress(int addressId) {
+        AddressDAO dao = new AddressDAO(this);
+        dao.openReadable();
+        Address[] address = dao.getAddress(addressId);
+        dao.close();
+        return address;
     }
 }

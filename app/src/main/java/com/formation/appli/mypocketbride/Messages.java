@@ -6,7 +6,7 @@ package com.formation.appli.mypocketbride;
 
 public class Messages {
     private String text;
-    private int adressContext, behaviour;//Context will be attribute int 1 for home, 2 for work, etc...
+    private int adressContext, behaviour,id;//Context will be attribute int 1 for home, 2 for work, etc...
 
     //region getter/setter
 
@@ -34,10 +34,24 @@ public class Messages {
         this.behaviour = behaviour;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     //endregion
 
 
     public Messages(String text, int adressContext, int behaviour) {
+        this.text = text;
+        this.adressContext = adressContext;
+        this.behaviour = behaviour;
+    }
+    public Messages(int id,String text, int adressContext, int behaviour) {
+        this.id=id;
         this.text = text;
         this.adressContext = adressContext;
         this.behaviour = behaviour;

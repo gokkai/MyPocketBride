@@ -10,6 +10,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.formation.appli.mypocketbride.DB.DAO.AddressDAO;
+import com.formation.appli.mypocketbride.DB.DAO.CompanionDAO;
+import com.formation.appli.mypocketbride.DB.DAO.InteractDAO;
+import com.formation.appli.mypocketbride.DB.DAO.LocationDAO;
+import com.formation.appli.mypocketbride.DB.DAO.UserDAO;
 import com.formation.appli.mypocketbride.GPS.Position;
 import com.formation.appli.mypocketbride.Geocodage.RequestGeocodage;
 
@@ -145,11 +150,61 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
             return;
         }
         User user=new User(userMail,userPwd1,userDateOfBirth,userNickname,userSex);
+        //region DB usage
+        UserDAO userDao = new UserDAO(this);
+        userDao.openWritable();
+        userDao.insert(user);
+        userDao.close();
+        //endregion
+        int userID=user.getId();
+        Companion companion=new Companion(1,0);
+        //region DB usage
+        CompanionDAO companionDao = new CompanionDAO(this);
+        companionDao.openWritable();
+        companionDao.insert(companion);
+        companionDao.close();
+        //endregion
+        int companionID=companion.getId();
+        Interact interact=new Interact(userCompanion,companionID,userID);
+        //region DB usage
+        InteractDAO interactDao = new InteractDAO(this);
+        interactDao.openWritable();
+        interactDao.insert(interact);
+        interactDao.close();
+        //endregion
         Position p;
         p=getPosition(userHome);
-        Address home=new Address(p.getX(),p.getY(),1);
+        Address home=new Address(p.getX(),p.getY());
+        //region DB usage
+        AddressDAO addressDao = new AddressDAO(this);
+        addressDao.openWritable();
+        addressDao.insert(home);
+        addressDao.close();
+        //endregion
+        int homeId=home.getId();
+        Location locationH=new Location(1,userID,homeId);
+        //region DB usage
+        LocationDAO locationHome = new LocationDAO(this);
+        locationHome.openWritable();
+        locationHome.insert(locationH);
+        locationHome.close();
+        //endregion
         p=getPosition(userWork);
-        Address work=new Address(p.getX(),p.getY(),2);
+        Address work=new Address(p.getX(),p.getY());
+        //region DB usage
+        AddressDAO addressWDao = new AddressDAO(this);
+        addressWDao.openWritable();
+        addressWDao.insert(work);
+        addressWDao.close();
+        //endregion
+        int workId=work.getId();
+        Location locationW=new Location(2,userID,workId);
+        //region DB usage
+        LocationDAO locationWork = new LocationDAO(this);
+        locationWork.openWritable();
+        locationWork.insert(locationW);
+        locationWork.close();
+        //endregion
 
     }
 

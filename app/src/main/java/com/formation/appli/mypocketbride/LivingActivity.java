@@ -23,9 +23,9 @@ import com.formation.appli.mypocketbride.GPS.Position;
 
 public class LivingActivity extends AppCompatActivity implements Localisation.ILocalisation{
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private final static Address home=new Address(50.806784,4.343913,1);
-    private final static Address work=new Address(50.837803,4353648,2);
-    private final static Companion hatsune=new Companion("Hatsune",1,0);
+    private final static Address home=new Address(50.806784,4.343913);
+    private final static Address work=new Address(50.837803,4353648);
+    //private final static Companion hatsune=new Companion("Hatsune",1,0);
     private final static Messages messageHome=new Messages("Bienvenue à la maison", 1,0);
     private final static Messages messageWork=new Messages("Bon courage pour le travail", 2,0);
 

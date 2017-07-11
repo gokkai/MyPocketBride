@@ -6,7 +6,7 @@ package com.formation.appli.mypocketbride;
 
 public class User {
     private String mail,pswd,dateOfBirth,nickname;
-    private int sex; // Sex is 1 for male and 2 for female in all the app
+    private int sex, id; // Sex is 1 for male and 2 for female in all the app
 
     //region getter/setter
     public String getMail() {
@@ -49,10 +49,26 @@ public class User {
         this.sex = sex;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     //endregion
 
 
     public User(String mail, String pswd, String dateOfBirth, String nickname, int sex) {
+        this.mail = mail;
+        this.pswd = pswd;
+        this.dateOfBirth = dateOfBirth;
+        this.nickname = nickname;
+        this.sex = sex;
+    }
+    public User(int id,String mail, String pswd, String dateOfBirth, String nickname, int sex) {
+        this.id=id;
         this.mail = mail;
         this.pswd = pswd;
         this.dateOfBirth = dateOfBirth;

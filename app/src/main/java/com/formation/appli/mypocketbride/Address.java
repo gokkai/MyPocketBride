@@ -6,7 +6,7 @@ package com.formation.appli.mypocketbride;
 
 public class Address {
     private double longitude, latitude;
-    private int adressContext; //Context will be attribute int 1 for home, 2 for work, etc...
+    private int id;
 
         //region getter/setter
     public double getlatitude() {
@@ -17,13 +17,13 @@ public class Address {
         this.latitude = latitude;
     }
 
-    public int getAdressContext() {
+    /*public int getAdressContext() {
         return adressContext;
     }
 
     public void setAdressContext(int adressContext) {
         this.adressContext = adressContext;
-    }
+    }*/
 
     public double getLongitude() {
         return longitude;
@@ -33,12 +33,25 @@ public class Address {
         this.longitude = longitude;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     //endregion
 
 
-    public Address(double latitude, double longitude, int context) {
+    public Address(double latitude, double longitude) {
         this.longitude = longitude;
         this.latitude=latitude;
-        this.adressContext=context;
+    }
+
+    public Address(int id,double latitude, double longitude) {
+        this.longitude = longitude;
+        this.latitude=latitude;
+        this.id = id;
     }
 }

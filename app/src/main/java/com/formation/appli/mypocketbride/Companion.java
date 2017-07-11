@@ -5,7 +5,7 @@ package com.formation.appli.mypocketbride;
  */
 
 public class Companion {
-    private String name;
+    //private String name;
     private int sex,behaviour,id; // Sex is 1 for male and 2 for female in all the app,
                                   //Behaviour will be coming and deal with using int
                                   //id will be used when the DB will be implement
@@ -27,13 +27,13 @@ public class Companion {
         this.behaviour = behaviour;
     }
 
-    public String getName() {
+   /* public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
+    }*/
 
     public int getSex() {
         return sex;
@@ -46,8 +46,14 @@ public class Companion {
     //endregion
 
 
-    public Companion(String name, int sex,int behaviour) {
-        this.name = name;
+    public Companion( int sex,int behaviour) {
+        //this.name = name;
+        this.sex = sex;
+        this.behaviour=behaviour;
+    }
+    public Companion(int id, int sex,int behaviour) {
+        //this.name = name;
+        this.id=id;
         this.sex = sex;
         this.behaviour=behaviour;
     }

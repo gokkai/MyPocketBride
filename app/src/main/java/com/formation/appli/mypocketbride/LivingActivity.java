@@ -19,12 +19,13 @@ import com.formation.appli.mypocketbride.GPS.Localisation;
 import com.formation.appli.mypocketbride.GPS.Position;
 
 public class LivingActivity extends AppCompatActivity implements Localisation.ILocalisation{
+    public int userId;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private final static Address home=new Address(50.806784,4.343913);
-    private final static Address work=new Address(50.837803,4353648);
+    //private static final  Address home=new Address(50.806784,4.343913);
+    //private static final  Address work=new Address(50.837803,4353648);
     //private final static Companion hatsune=new Companion("Hatsune",1,0);
-    private final static Messages messageHome=new Messages("Bienvenue à la maison", 1,0);
-    private final static Messages messageWork=new Messages("Bon courage pour le travail", 2,0);
+    //private static final  Messages messageHome=new Messages("Bienvenue à la maison", 1,0);
+    //private static final  Messages messageWork=new Messages("Bon courage pour le travail", 2,0);
 
 
     private TextView longi, lati;
@@ -36,6 +37,13 @@ public class LivingActivity extends AppCompatActivity implements Localisation.IL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_living);
+        Intent intent = getIntent();
+        Bundle bd = intent.getExtras();
+        if(bd != null)
+        {
+            userId = (int) bd.get("idUser");
+
+        }
         longi=(TextView)findViewById(R.id.tv_la_longitude);
         lati=(TextView)findViewById(R.id.tv_la_latitude);
         localiser();

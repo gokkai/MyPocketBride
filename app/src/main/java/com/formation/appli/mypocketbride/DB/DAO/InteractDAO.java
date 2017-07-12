@@ -25,7 +25,7 @@ public class InteractDAO {
                     + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + COLUMN_NAME + " TEXT NOT NULL, "
                     + COLUMN_COMPANIONID + " INTEGER NOT NULL, "
-                    + COLUMN_USERID +" INTEGER NOT NULL"
+                    + COLUMN_USERID +" INTEGER NOT NULL "
                     + " );";
     public static final String DELETE_REQUEST =
             "DROP TABLE IF EXISTS " + TABLE_INTERACT + ";";

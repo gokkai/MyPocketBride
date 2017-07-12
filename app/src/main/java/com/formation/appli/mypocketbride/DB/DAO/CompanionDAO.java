@@ -26,7 +26,7 @@ public class CompanionDAO {
                     + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     //+ COLUMN_NAME + " TEXT NOT NULL, "
                     + COLUMN_BEHAVIOUR + " INTEGER NOT NULL, "
-                    + COLUMN_SEX+" INTEGER NOT NULL"
+                    + COLUMN_SEX+" INTEGER NOT NULL "
                     + " );";
     public static final String DELETE_REQUEST =
             "DROP TABLE IF EXISTS " + TABLE_COMPANION + ";";
@@ -87,6 +87,7 @@ public class CompanionDAO {
         long number = db.update(TABLE_COMPANION, cv, whereClause,null);
         return  number;
     }
+
     private Companion cursorToCompanion(Cursor c) {
         int id = c.getInt(c.getColumnIndex(COLUMN_ID));
         int behaviour = c.getInt(c.getColumnIndex(COLUMN_BEHAVIOUR));

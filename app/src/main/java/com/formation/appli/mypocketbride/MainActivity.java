@@ -8,8 +8,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button btn_main_start, btn_main_signIn;
-    private final static Address home=new Address(50.806784,4.343913,1);
-    private final static Address work=new Address(50.837803,4353648,2);
+   //private final static Address home=new Address(50.806784,4.343913,1);
+    //private final static Address work=new Address(50.837803,4353648,2);
 
 
     @Override

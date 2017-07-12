@@ -23,7 +23,7 @@ public class AddressDAO {
             "CREATE TABLE IF NOT EXISTS " + TABLE_ADDRESS + " ( "
                     + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + COLUMN_LONGITUDE + " FLOAT NOT NULL, "
-                    + COLUMN_LATITUDE + " FLOAT NOT NULL, "
+                    + COLUMN_LATITUDE + " FLOAT NOT NULL "
                     + " );";
     public static final String DELETE_REQUEST =
             "DROP TABLE IF EXISTS " + TABLE_ADDRESS + ";";
@@ -92,21 +92,23 @@ public class AddressDAO {
         return new Address(id,lat,longitude);
     }
 
-    public Address[] getAddress(int addressId){
+    public Address[] getAddress(int userId){
 
-        String whereClause = COLUMN_ID + " = " +addressId;
-        Cursor c = db.query(TABLE_ADDRESS,null, whereClause, null, null, null, null);
-
+        //String whereClause = COLUMN_ID + " = " +addressId;
+        //Cursor c = db.query(TABLE_ADDRESS,null, whereClause, null, null, null, null);
+        String query="SELECT _id,longitude,latitude FROM address a INNER JOIN location l ON "
+                +"a.id=l.addressUser where l.userId="+userId;
+        Cursor c=db.rawQuery(query,null);
         int count = c.getCount();
 
         if(count > 0) {
-            Address[] address = new Address[count];
+            Address[] addresses = new Address[count];
 
             for(int i = 0; i < count; i++) {
                 c.moveToPosition(i);
-                address[i] = cursorToAddress(c);
+                addresses[i] = cursorToAddress(c);
             }
-            return address;
+            return addresses;
         }
         return null;
     }

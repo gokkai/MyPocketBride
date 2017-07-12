@@ -28,7 +28,7 @@ public class UserDAO {
                     + COLUMN_MAIL + " TEXT NOT NULL, "
                     + COLUMN_NICKNAME + " TEXT NOT NULL, "
                     + COLUMN_PSWD + " TEXT NOT NULL, "
-                    + COLUMN_DATEOFBIRTH + " TEXT NOT NULL"
+                    + COLUMN_DATEOFBIRTH + " TEXT NOT NULL, "
                     + COLUMN_SEX+" INTEGER NOT NULL"
                     + " );";
     public static final String DELETE_REQUEST =

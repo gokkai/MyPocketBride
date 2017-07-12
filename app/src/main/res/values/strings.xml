@@ -23,8 +23,9 @@
     <string name="permission_denied_explanation">Permission was denied, but is needed for core functionality.</string>
     <string name="settings">Settings</string>
 
+    <!-- TextView Strings-->
     <string name="mail">Your mail, will be your login:</string>
-    <string name="pasword">Pasword:</string>
+    <string name="pasword">Password:</string>
     <string name="pswverif">Password verification:</string>
     <string name="dateOfBirth">Date of Birth</string>
     <string name="yourName">How will your companion name you?</string>
@@ -32,17 +33,21 @@
     <string name="addHome">Home address:</string>
     <string name="addWork">Work address:</string>
 
+    <!-- Button Strings-->
     <string name="signIn">Sign In</string>
     <string name="reinitiate">Reinitiate</string>
 
+
+    <!-- Hint Strings-->
     <string name="hint_mail">exemple@gmail.com</string>
-    <string name="hint_pasword">Pasword</string>
+    <string name="hint_password">Pasword</string>
     <string name="hint_pswverif">Password Verification</string>
     <string name="hint_dob">01/01/1901</string>
     <string name="hint_yourName">Pumpkin</string>
     <string name="hint_companionName">Hatsune</string>
     <string name="hint_address">ex: Rue Vocaloide 42, 1000 Bruxelles</string>
 
+    <!-- Empty Strings-->
     <string name="bad_pwd">Error in passwords</string>
     <string name="empty_pwd">Password empty</string>
     <string name="empty_mail">Mail empty</string>
@@ -53,5 +58,8 @@
     <string name="empty_work">Work address empty</string>
     <string name="no_sex">Please choose a sex</string>
     <string name="exceptionAddress">Address not found</string>
+
+    <!-- Toast  Strings-->
+    <string name="success">User successfully created</string>
 
 </resources>

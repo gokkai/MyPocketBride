@@ -25,7 +25,7 @@ public class LocationDAO {
                     + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + COLUMN_ADDRESSCONTEXT + " TEXT NOT NULL, "
                     + COLUMN_ADDRESSID + " INTEGER NOT NULL, "
-                    + COLUMN_USERID +" INTEGER NOT NULL"
+                    + COLUMN_USERID +" INTEGER NOT NULL "
                     + " );";
     public static final String DELETE_REQUEST =
             "DROP TABLE IF EXISTS " + TABLE_LOCATION + ";";
@@ -116,6 +116,7 @@ public class LocationDAO {
 
         String whereClause = COLUMN_USERID + " = " +userId+" AND "+COLUMN_ADDRESSCONTEXT+" = "+2;
         Cursor c = db.query(TABLE_LOCATION,null, whereClause, null, null, null, null);
+
 
         int count = c.getCount();
 

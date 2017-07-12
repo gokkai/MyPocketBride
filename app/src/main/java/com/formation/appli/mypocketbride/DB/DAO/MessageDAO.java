@@ -26,7 +26,7 @@ public class MessageDAO {
                     + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + COLUMN_TEXT + " TEXT NOT NULL, "
                     + COLUMN_ADDRESSCONTEXT + " INTEGER NOT NULL, "
-                    + COLUMN_BEHAVIOUR +" INTEGER NOT NULL"
+                    + COLUMN_BEHAVIOUR +" INTEGER NOT NULL "
                     + " );";
     public static final String DELETE_REQUEST =
             "DROP TABLE IF EXISTS " + TABLE_MESSAGE + ";";

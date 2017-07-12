@@ -31,6 +31,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     Button btn_validate, btn_reinitiate;
     EditText et_mail, et_psw,et_psw2,et_companionName, et_nickname,et_addHome,et_addWork,et_dateOfBirth;
     RadioButton male, female;
+
     private String SHAHash;
     public static int NO_OPTIONS=0;
 
@@ -159,7 +160,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
             return;
         }
 
-        userPwd1=computeSHAHash(userPwd1);
+        userPwd1= computeShaHash(userPwd1);
         User user=new User(userMail,userPwd1,userDateOfBirth,userNickname,userSex);
         //region DB usage user
         UserDAO userDao = new UserDAO(this);
@@ -244,7 +245,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     }
 
 
-    public String computeSHAHash(String password){
+    public String computeShaHash(String password){
 
         MessageDigest mdSha1 = null;
         try

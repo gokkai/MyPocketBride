@@ -131,6 +131,20 @@ public class LocationDAO {
         }
         return null;
     }
+    public int getContext(int adresId){
+        String query="Select addressContext from location where addressId= "+adresId;
+        Cursor c=db.rawQuery(query,null);
+        c.moveToFirst();
+        int context=c.getInt(0);
+
+        if(context> 0) {
+
+           return context;
+            }
+
+        return -1;
+
+    }
 
 
 }

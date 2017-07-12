@@ -113,5 +113,18 @@ public class InteractDAO {
         }
         return null;
     }
+    public String getName(int userId){
+        String whereClause = COLUMN_USERID + " = " +userId;
+        String[] Fields = {COLUMN_NAME};
+        Cursor c = db.query(TABLE_INTERACT,Fields,whereClause, null, null, null, null);
+        c.moveToFirst();
+        String name=c.getString(0);
+        if(name!="") {
+
+            return name;
+        }
+
+        return null;
+    }
 
 }

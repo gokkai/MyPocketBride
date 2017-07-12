@@ -103,9 +103,9 @@ public class UserDAO {
 
         return new User(id,mail,psw,dateOfBirth,nickname,sex);
     }
-    public User[] getUser(int mail){
+    public User[] getUser(String mail){
 
-        String whereClause = COLUMN_MAIL + " = " +mail;
+        String whereClause = COLUMN_MAIL + " LIKE " +mail;
         Cursor c = db.query(TABLE_USER,null, whereClause, null, null, null, null);
 
         int count = c.getCount();
@@ -119,6 +119,19 @@ public class UserDAO {
             }
             return user;
         }
+        return null;
+    }
+    public String getNickname(int userId){
+        String whereClause = COLUMN_ID + " = " +userId;
+        String[] Fields = {COLUMN_NICKNAME };
+        Cursor c = db.query(TABLE_USER,Fields,whereClause, null, null, null, null);
+        c.moveToFirst();
+        String nickname=c.getString(0);
+        if(nickname!="") {
+
+            return nickname;
+        }
+
         return null;
     }
 

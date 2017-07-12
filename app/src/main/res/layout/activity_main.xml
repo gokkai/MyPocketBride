@@ -16,7 +16,12 @@
         android:layout_height="wrap_content" />
     <Button
         android:id="@+id/btn__main_signIn"
-        android:text="signIn"
+        android:text="Sign In"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="Log In"
+        android:id="@+id/btn__main_logIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

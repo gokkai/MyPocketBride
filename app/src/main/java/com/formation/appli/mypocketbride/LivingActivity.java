@@ -14,9 +14,13 @@ import android.widget.TextView;
 
 
 import com.formation.appli.mypocketbride.DB.DAO.AddressDAO;
+import com.formation.appli.mypocketbride.DB.DAO.InteractDAO;
 import com.formation.appli.mypocketbride.DB.DAO.LocationDAO;
+import com.formation.appli.mypocketbride.DB.DAO.MessageDAO;
 import com.formation.appli.mypocketbride.GPS.Localisation;
 import com.formation.appli.mypocketbride.GPS.Position;
+
+import java.util.Random;
 
 public class LivingActivity extends AppCompatActivity implements Localisation.ILocalisation{
     public int userId;
@@ -32,6 +36,7 @@ public class LivingActivity extends AppCompatActivity implements Localisation.IL
 
     private double latitude,longitude, latitudeAddress,longitudeAdress;
     private Localisation localisation;
+    String textNotif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,57 +54,11 @@ public class LivingActivity extends AppCompatActivity implements Localisation.IL
         localiser();
 
     }
-    private void sendNotif(NotificationCompat.Builder builder){
-        Intent intent =new Intent(this, LivingActivity.class);
-        TaskStackBuilder stackBuilder=TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(LivingActivity.class);
-        stackBuilder.addNextIntent(intent);
-        PendingIntent pendingIntent=stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(pendingIntent);
-        NotificationManager NM= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        NM.notify(0,builder.build());
 
-
-
-    }
     private void localiser(){
         Localisation gps=new Localisation();
         gps.setCallback(this);
         gps.askLocation(this);
-    }
-
-    public void getLocation(Position position) {
-        longitude=position.getX();
-        latitude=position.getY();
-        lati.setText(String.valueOf(latitude));
-        longi.setText(String.valueOf(longitude));
-       /*
-       int userid=user.getId();
-       loadHomeLocation(userId);
-       //TODO
-       int addresId=location.getAddressId();
-       loadAddress(addressId);
-
-
-       if(latitude==work.getlatitude()&&longitude==work.getLongitude()){
-            NotificationCompat.Builder mBuilder= new NotificationCompat.Builder(this);
-            mBuilder.setSmallIcon(R.drawable.hm_logo);
-            mBuilder.setContentTitle(hatsune.getName());
-            mBuilder.setContentText(messageWork.getText());
-            sendNotif(mBuilder);
-            //developper en envoyant simplement le adressContext après la mise en place de la DB
-            //A voir en fonction de la manière dont on recccupere le msg
-
-
-        }else if (latitude==home.getlatitude()&&longitude==home.getLongitude()){
-            NotificationCompat.Builder mBuilder= new NotificationCompat.Builder(this);
-            mBuilder.setSmallIcon(R.drawable.hm_logo);
-            mBuilder.setContentTitle(hatsune.getName());
-            mBuilder.setContentText(messageHome.getText());
-
-        }
-*/
-        //Log.w("LOCALISATION",position.toString());
     }
     public void  onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
         switch (requestCode) {
@@ -113,13 +72,60 @@ public class LivingActivity extends AppCompatActivity implements Localisation.IL
 
                     // TODO
                 }
-
             }
-
 
         }
     }
-    private UserLocation[] loadHomeLocation(int userId) {
+
+    public void getLocation(Position position) {
+
+        longitude=position.getX();
+        latitude=position.getY();
+        lati.setText(String.valueOf(latitude));
+        longi.setText(String.valueOf(longitude));
+
+        Address[] addresses=loadAddress(userId);
+        for(int i=0;i<addresses.length;i++){
+            double adressLati=addresses[i].getlatitude();
+            double adressLongi= addresses[i].getLongitude();
+            if(latitude==adressLati&&longitude==adressLongi){
+                int adressId=addresses[i].getId();
+                int context=getContext(adressId);
+                Messages[] messages=getMessage(context);
+                Random r = new Random();
+                int random = r.nextInt(messages.length);
+                textNotif=messages[random].getText();
+                sendNotification(textNotif);
+                //TODO get out of for?
+            }
+        }
+
+    }
+    private void sendNotification(String texto){
+
+        String name=getName(userId);
+
+        NotificationCompat.Builder mBuilder=new NotificationCompat.Builder(this);
+        mBuilder.setSmallIcon(R.drawable.hm_logo);
+        mBuilder.setContentTitle(name);
+        mBuilder.setContentText(texto);
+
+        sendNotif(mBuilder);
+    }
+
+    private void sendNotif(NotificationCompat.Builder builder){
+        Intent intent =new Intent(this, LivingActivity.class);
+        TaskStackBuilder stackBuilder=TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(LivingActivity.class);
+        stackBuilder.addNextIntent(intent);
+        PendingIntent pendingIntent=stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(pendingIntent);
+        NotificationManager NM= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NM.notify(0,builder.build());
+
+    }
+
+ /*   private UserLocation[] loadHomeLocation(int userId) {
         LocationDAO dao = new LocationDAO(this);
         dao.openReadable();
         UserLocation[] location = dao.getAllHomeFromUser(userId);
@@ -132,12 +138,36 @@ public class LivingActivity extends AppCompatActivity implements Localisation.IL
         UserLocation[] location = dao.getAllWorkFromUser(userId);
         dao.close();
         return location;
-    }
-    private Address[] loadAddress(int addressId) {
+    }*/
+    //region get from DB
+    private Address[] loadAddress(int userId) {
         AddressDAO dao = new AddressDAO(this);
         dao.openReadable();
-        Address[] address = dao.getAddress(addressId);
+        Address[] address = dao.getAddress(userId);
         dao.close();
         return address;
     }
+    private int getContext(int adresId){
+        LocationDAO dao=new LocationDAO(this);
+        dao.openReadable();
+        int context=dao.getContext(adresId);
+        dao.close();
+        return context;
+    }
+    private Messages[] getMessage(int context){
+        MessageDAO dao=new MessageDAO(this);
+        dao.openReadable();
+        Messages[] messages=dao.getAllInContext(context);
+        dao.close();
+        return messages;
+    }
+    private String getName(int idUser){
+        InteractDAO dao=new InteractDAO(this);
+        dao.openReadable();
+        String name=dao.getName(idUser);
+        dao.close();
+        return name;
+    }
+
+    //endregion
 }

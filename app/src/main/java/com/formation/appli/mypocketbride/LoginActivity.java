@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.formation.appli.mypocketbride.DB.DAO.UserDAO;
 
@@ -73,18 +74,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     private void comparePSwd(String mail,String pswd ){
         User[] users=getUser(mail);
-        for(int i=0;i<users.length;i++){
+        if(users==null){
+            Toast.makeText(this,R.string.error_unknow_mail,Toast.LENGTH_SHORT).show();
+        }else for(User curUser:users){
             pswd=computeShaHash(pswd);
-            String pswdRef=users[i].getPswd();
+            String pswdRef=curUser.getPswd();
             if(pswd.equals(pswdRef)){
-                int id=users[i].getId();
+                int id=curUser.getId();
                 Intent intent =new Intent(this,LivingActivity.class);
                 intent.putExtra("idUser",id);
                 startActivity(intent);
+                break;
             }
-
+            Toast.makeText(this,R.string.error_incorrect_password,Toast.LENGTH_SHORT).show();
         }
-
     }
     private User[] getUser(String mail){
         UserDAO dao=new UserDAO(this);

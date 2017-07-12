@@ -25,11 +25,8 @@ import java.util.Random;
 public class LivingActivity extends AppCompatActivity implements Localisation.ILocalisation{
     public int userId;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    //private static final  Address home=new Address(50.806784,4.343913);
-    //private static final  Address work=new Address(50.837803,4353648);
-    //private final static Companion hatsune=new Companion("Hatsune",1,0);
-    //private static final  Messages messageHome=new Messages("Bienvenue à la maison", 1,0);
-    //private static final  Messages messageWork=new Messages("Bon courage pour le travail", 2,0);
+    private int pastContext=0;
+
 
 
     private TextView longi, lati;
@@ -85,21 +82,26 @@ public class LivingActivity extends AppCompatActivity implements Localisation.IL
         longi.setText(String.valueOf(longitude));
 
         Address[] addresses=loadAddress(userId);
-        for(int i=0;i<addresses.length;i++){
-            double adressLati=addresses[i].getlatitude();
-            double adressLongi= addresses[i].getLongitude();
-            if(latitude==adressLati&&longitude==adressLongi){
-                int adressId=addresses[i].getId();
+        //for(int i=0;i<addresses.length;i++){
+        for(Address curAddress:addresses){
+            double addressLati=curAddress.getlatitude();
+            double addressLongi= curAddress.getLongitude();
+            if(latitude==addressLati&&longitude==addressLongi){
+                int adressId=curAddress.getId();
                 int context=getContext(adressId);
-                Messages[] messages=getMessage(context);
-                Random r = new Random();
-                int random = r.nextInt(messages.length);
-                textNotif=messages[random].getText();
-                sendNotification(textNotif);
-                //TODO get out of for?
+                if(context!=pastContext) {
+                    Messages[] messages = getMessage(context);
+                    Random r = new Random();
+                    int random = r.nextInt(messages.length + 1);
+                    textNotif = messages[random].getText();
+                    sendNotification(textNotif);
+                    pastContext=context;
+                    break;
+                }
+
             }
         }
-
+        //TODO if possible put pastContext to 0 when there is no match
     }
     private void sendNotification(String texto){
 
@@ -125,20 +127,7 @@ public class LivingActivity extends AppCompatActivity implements Localisation.IL
 
     }
 
- /*   private UserLocation[] loadHomeLocation(int userId) {
-        LocationDAO dao = new LocationDAO(this);
-        dao.openReadable();
-        UserLocation[] location = dao.getAllHomeFromUser(userId);
-        dao.close();
-        return location;
-    }
-    private UserLocation[] loadWorkLocation(int userId) {
-        LocationDAO dao = new LocationDAO(this);
-        dao.openReadable();
-        UserLocation[] location = dao.getAllWorkFromUser(userId);
-        dao.close();
-        return location;
-    }*/
+
     //region get from DB
     private Address[] loadAddress(int userId) {
         AddressDAO dao = new AddressDAO(this);

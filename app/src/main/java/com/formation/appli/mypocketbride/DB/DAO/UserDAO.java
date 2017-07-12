@@ -64,7 +64,7 @@ public class UserDAO {
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_NICKNAME, user.getNickname());
         cv.put(COLUMN_MAIL, user.getMail());
-        cv.put(COLUMN_PSWD, user.getMail());
+        cv.put(COLUMN_PSWD, user.getPswd());
         cv.put(COLUMN_DATEOFBIRTH, user.getDateOfBirth());
         cv.put(COLUMN_SEX, user.getSex());
 
@@ -105,7 +105,7 @@ public class UserDAO {
     }
     public User[] getUser(String mail){
 
-        String whereClause = COLUMN_MAIL + " LIKE " +mail;
+        String whereClause = COLUMN_MAIL + " LIKE '" +mail+"'";
         Cursor c = db.query(TABLE_USER,null, whereClause, null, null, null, null);
 
         int count = c.getCount();

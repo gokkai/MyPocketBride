@@ -9,6 +9,7 @@
     <string name="action_sign_in">Sign in </string>
     <string name="action_register">Not Registered?</string>
     <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_unknow_mail">I don\'t know this mail</string>
     <string name="error_field_required">This field is required</string>
 
 
@@ -22,7 +23,7 @@
 
     <!-- TextView Strings-->
     <string name="mail">Your mail, will be your login:</string>
-    <string name="pasword">Password:</string>
+    <string name="password">Password:</string>
     <string name="pswverif">Password verification:</string>
     <string name="dateOfBirth">Date of Birth</string>
     <string name="yourName">How will your companion name you?</string>
@@ -36,8 +37,8 @@
 
 
     <!-- Hint Strings-->
-    <string name="hint_mail">exemple@gmail.com</string>
-    <string name="hint_password">Pasword</string>
+    <string name="hint_mail">example@gmail.com</string>
+    <string name="hint_password">Password</string>
     <string name="hint_pswverif">Password Verification</string>
     <string name="hint_dob">01/01/1901</string>
     <string name="hint_yourName">Pumpkin</string>

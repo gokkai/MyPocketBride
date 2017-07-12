@@ -13,7 +13,7 @@ import com.formation.appli.mypocketbride.Interact;
  */
 
 public class InteractDAO {
-    public static final String TABLE_INTERACT = "user";
+    public static final String TABLE_INTERACT = "interact";
 
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_NAME = "name";

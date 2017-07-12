@@ -13,7 +13,7 @@ import com.formation.appli.mypocketbride.UserLocation;
  */
 
 public class LocationDAO {
-    public static final String TABLE_LOCATION = "user";
+    public static final String TABLE_LOCATION = "location";
 
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_ADDRESSCONTEXT = "addressContext";

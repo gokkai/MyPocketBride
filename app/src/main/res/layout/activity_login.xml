@@ -26,19 +26,22 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
             <EditText
                 android:id="@+id/et_logIn_mail"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
                 android:hint="@string/prompt_email"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:inputType="textEmailAddress"/>
             <EditText
                 android:id="@+id/et_logIn_password"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
                 android:hint="@string/prompt_password"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:inputType="textPassword"/>
 
 
 

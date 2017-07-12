@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pasword"
+                android:text="@string/password"
                 android:textColor="@color/black"/>
             <EditText
                 android:id="@+id/et_sign_psw1"
@@ -67,6 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="35sp"
                 android:hint="@string/hint_companionName"
+                android:text="Hatsune"
                 android:textSize="15sp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -78,6 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="35sp"
                 android:hint="@string/hint_yourName"
+                android:text="Pumpkin"
                 android:textSize="15sp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -90,6 +92,7 @@
                 android:layout_height="35sp"
                 android:inputType="date"
                 android:hint="@string/hint_dob"
+                android:text="25/09/1986"
                 android:textSize="15sp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -102,6 +105,7 @@
                 android:layout_height="35sp"
                 android:inputType="textPostalAddress"
                 android:hint="@string/hint_address"
+                android:text="Avenue Brugmann 358 1180 Uccle"
                 android:textSize="15sp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -114,7 +118,8 @@
                 android:layout_height="35sp"
                 android:inputType="textPostalAddress"
                 android:hint="@string/hint_address"
-                android:textSize="15sp"/>
+                android:text="Rue de la Régence 58 1000 Bruxelles"
+                android:textSize="15sp" />
             //end region
             <RadioGroup
                 android:layout_width="match_parent"

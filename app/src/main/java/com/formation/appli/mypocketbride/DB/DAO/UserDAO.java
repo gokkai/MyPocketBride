@@ -105,7 +105,7 @@ public class UserDAO {
     }
     public User[] getUser(String mail){
 
-        String whereClause = COLUMN_MAIL + " LIKE '" +mail+"'";
+        String whereClause = COLUMN_MAIL + " LIKE '%" +mail+"%'";
         Cursor c = db.query(TABLE_USER,null, whereClause, null, null, null, null);
 
         int count = c.getCount();

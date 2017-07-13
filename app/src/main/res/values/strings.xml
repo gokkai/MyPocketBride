@@ -6,11 +6,11 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password </string>
-    <string name="action_sign_in">Sign in </string>
-    <string name="action_register">Not Registered?</string>
+
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_unknow_mail">I don\'t know this mail</string>
     <string name="error_field_required">This field is required</string>
+    <string name="error_user_exist">This mail is already registered</string>
 
 
 
@@ -34,6 +34,8 @@
     <!-- Button Strings-->
     <string name="signIn">Sign In</string>
     <string name="reinitiate">Reinitiate</string>
+    <string name="logIn">Logging In</string>
+    <string name="register">Not Registered?</string>
 
 
     <!-- Hint Strings-->
@@ -59,5 +61,6 @@
 
     <!-- Toast  Strings-->
     <string name="success">User successfully created</string>
+    <string name="remember">Remember me</string>
 
 </resources>

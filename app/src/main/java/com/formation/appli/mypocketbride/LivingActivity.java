@@ -76,18 +76,20 @@ public class LivingActivity extends AppCompatActivity implements Localisation.IL
 
     public void getLocation(Position position) {
 
-        longitude=position.getX();
-        latitude=position.getY();
+        latitude =position.getLatitude();
+        longitude=position.getLongitude();
         lati.setText(String.valueOf(latitude));
         longi.setText(String.valueOf(longitude));
 
         Address[] addresses=loadAddress(userId);
-        //for(int i=0;i<addresses.length;i++){
-        for(Address curAddress:addresses){
+        for(int i=0;i<addresses.length;i++){
+        /*for(Address curAddress:addresses){
             double addressLati=curAddress.getlatitude();
-            double addressLongi= curAddress.getLongitude();
+            double addressLongi= curAddress.getLongitude();*/
+            double addressLati=addresses[i].getlatitude();
+            double addressLongi=addresses[i].getLongitude();
             if(latitude==addressLati&&longitude==addressLongi){
-                int adressId=curAddress.getId();
+                int adressId=addresses[i].getId();
                 int context=getContext(adressId);
                 if(context!=pastContext) {
                     Messages[] messages = getMessage(context);

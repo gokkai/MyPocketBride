@@ -5,28 +5,28 @@ package com.formation.appli.mypocketbride.GPS;
  */
 
 public class Position {
-    private double x, y;
+    private double latitude, longitude;
 
-    public Position(double x, double y) {
-        this.x = x;
-        this.y = y;
+    public Position(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     //region getter/setter
-    public double getX() {
-        return x;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public void setLatitude(double x) {
+        this.latitude = x;
     }
 
-    public double getY() {
-        return y;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setY(double y) {
-        this.y = y;
+    public void setLongitude(double y) {
+        this.longitude = y;
     }
 
     //endregion

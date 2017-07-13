@@ -97,7 +97,7 @@ public class AddressDAO {
         //String whereClause = COLUMN_ID + " = " +addressId;
         //Cursor c = db.query(TABLE_ADDRESS,null, whereClause, null, null, null, null);
         String query="SELECT a._id,longitude,latitude FROM address AS a INNER JOIN location AS l ON "
-                +"a._id=l.addressUser where l.userId="+userId;
+                +"a._id=l.addressId where l.userId="+userId;
         Cursor c=db.rawQuery(query,null);
         int count = c.getCount();
 

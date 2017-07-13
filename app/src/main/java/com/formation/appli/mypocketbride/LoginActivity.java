@@ -1,12 +1,15 @@
 package com.formation.appli.mypocketbride;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,9 +26,13 @@ import java.security.NoSuchAlgorithmException;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private String SHAHash;
     public static int NO_OPTIONS=0;
+    public static final String KEY_MAIL = "mail";
+    public static final String KEY_PWD = "pwd";
+    public static final String KEY_SAVE = "remember";
 
     Button btn_logIn,btn_register;
     EditText et_mail,et_password;
+    CheckBox ckRemember;
     //String userMail=this.et_mail.getText().toString();
     //String userPwd1 = this.et_psw.getText().toString();
 
@@ -42,6 +49,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         btn_logIn=(Button)findViewById(R.id.btn_logIn_logIn);
         btn_register=(Button)findViewById(R.id.btn_logIn_register);
+
+        ckRemember=(CheckBox)findViewById(R.id.ck_logIn_remember);
 
         btn_logIn.setOnClickListener(this);
         btn_register.setOnClickListener(this);
@@ -64,7 +73,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void logIn(){
         String mail=et_mail.getText().toString();
         String password=et_password.getText().toString();
+        boolean save = ckRemember.isChecked();
         comparePSwd(mail,password);
+        savePrefs(mail, password,save);
     }
 
     private void getToSignIn(){
@@ -84,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent intent =new Intent(this,LivingActivity.class);
                 intent.putExtra("idUser",id);
                 startActivity(intent);
-                break;
+                return;
             }
             Toast.makeText(this,R.string.error_incorrect_password,Toast.LENGTH_SHORT).show();
         }
@@ -95,6 +106,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         User[] users=dao.getUser(mail);
         dao.close();
         return users;
+    }
+    private void savePrefs(String mail, String pwd, boolean save) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+
+        if (save) {
+            editor.putString(KEY_MAIL, mail);
+            editor.putString(KEY_PWD, pwd);
+        } else {
+            editor.remove(KEY_MAIL);
+            editor.remove(KEY_PWD);
+        }
+        editor.putBoolean(KEY_SAVE, save);
+
+        editor.apply();
     }
 
     private static String convertToHex(byte[] data) throws java.io.IOException {

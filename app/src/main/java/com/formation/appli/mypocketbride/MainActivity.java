@@ -49,17 +49,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void start(){
         Intent intent=new Intent(this, LivingActivity.class);
         startActivity(intent);
-        finish();
+
     }
     private void signIn(){
         Intent intent=new Intent(this, SignIn.class);
         startActivity(intent);
-        finish();
+
     }
     private void logIn(){
         Intent intent=new Intent(this, LoginActivity.class);
         startActivity(intent);
-        finish();
+
     }
     private void initDBmessage(){
         MessageDAO messageDao = new MessageDAO(this);

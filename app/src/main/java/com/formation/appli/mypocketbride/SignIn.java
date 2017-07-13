@@ -159,6 +159,11 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
             et_psw.requestFocus();
             return;
         }
+       User[] users= getUser(userMail);
+        if(users!=null){
+            Toast.makeText(this, R.string.error_user_exist, Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         userPwd1= computeShaHash(userPwd1);
         User user=new User(userMail,userPwd1,userDateOfBirth,userNickname,userSex);
@@ -189,7 +194,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
 
         Position p;
         p=getPosition(userHome);
-        Address home=new Address(p.getX(),p.getY());
+        Address home=new Address(p.getLatitude(),p.getLongitude());
         //region DB usage address home
         AddressDAO addressDao = new AddressDAO(this);
         addressDao.openWritable();
@@ -207,7 +212,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         //endregion
 
         p=getPosition(userWork);
-        Address work=new Address(p.getX(),p.getY());
+        Address work=new Address(p.getLatitude(),p.getLongitude());
         //region DB usage address work
         AddressDAO addressWDao = new AddressDAO(this);
         addressWDao.openWritable();
@@ -268,6 +273,13 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
             e.printStackTrace();
         }
         return SHAHash;
+    }
+    private User[] getUser(String mail){
+        UserDAO dao=new UserDAO(this);
+        dao.openReadable();
+        User[] users=dao.getUser(mail);
+        dao.close();
+        return users;
     }
 
     public Position getPosition(String address) {

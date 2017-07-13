@@ -18,7 +18,7 @@ import com.formation.appli.mypocketbride.DB.DAO.UserDAO;
 public class DbHelper extends SQLiteOpenHelper {
 
         public static final String DB_NAME = "com.formation.appli.mypocketbride.database";
-        public static final int DB_VERSION = 4;
+        public static final int DB_VERSION = 5;
 
         public DbHelper(Context context) {
             super(context,DB_NAME,null,DB_VERSION);
@@ -41,5 +41,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
             onCreate(db);
         }
+
 
 }

@@ -114,4 +114,23 @@ public class MessageDAO {
         }
         return null;
     }
+    public Messages[] getAll(){
+
+
+        Cursor c = db.query(TABLE_MESSAGE,null,null, null, null, null, null);
+
+        int count = c.getCount();
+
+        if(count > 0) {
+            Messages[] messages = new Messages[count];
+
+            for(int i = 0; i < count; i++) {
+                c.moveToPosition(i);
+                messages[i] = cursorToMessages(c);
+            }
+            return messages;
+        }
+        return null;
+    }
+
 }

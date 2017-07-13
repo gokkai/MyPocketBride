@@ -74,10 +74,19 @@ public class LivingActivity extends AppCompatActivity implements Localisation.IL
         }
     }
 
+    private double roundUp(double nombre) {
+        double precision = 1000;
+
+        return Math.round(nombre * precision)/precision;
+    }
+
     public void getLocation(Position position) {
 
-        latitude =position.getLatitude();
-        longitude=position.getLongitude();
+
+
+        latitude = roundUp(position.getLatitude());
+        longitude=roundUp(position.getLongitude());
+
         lati.setText(String.valueOf(latitude));
         longi.setText(String.valueOf(longitude));
 
@@ -86,8 +95,10 @@ public class LivingActivity extends AppCompatActivity implements Localisation.IL
         /*for(Address curAddress:addresses){
             double addressLati=curAddress.getlatitude();
             double addressLongi= curAddress.getLongitude();*/
-            double addressLati=addresses[i].getlatitude();
-            double addressLongi=addresses[i].getLongitude();
+
+            double addressLati=roundUp(addresses[i].getlatitude());
+            double addressLongi=roundUp(addresses[i].getLongitude());
+
             if(latitude==addressLati&&longitude==addressLongi){
                 int adressId=addresses[i].getId();
                 int context=getContext(adressId);

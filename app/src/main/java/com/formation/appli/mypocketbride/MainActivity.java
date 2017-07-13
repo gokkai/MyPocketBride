@@ -13,17 +13,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_main_start, btn_main_signIn, btn_main_logIn;
    //private final static Address home=new Address(50.806784,4.343913,1);
     //private final static Address work=new Address(50.837803,4353648,2);
-    Messages home1 =new Messages("Welcome Home ",1,0);
-    Messages home2 =new Messages("How was your day ",1,0);
-    Messages home3 =new Messages("I miss you ",1,0);
-    Messages home4 =new Messages("I'm so happy to see you ",1,0);
-    //Messages Home5=new Messages(,1,0);
 
-    Messages work1 =new Messages("Have a nice day at work ",2,0);
-    Messages work2 =new Messages("Good luck for your work",2,0);
-    Messages work3 =new Messages("I'm going to miss you",2,0);
-    Messages work4 =new Messages("Don't forget to eat ",2,0);
-    //Messages Work5=new Messages(,2,0);
 
 
 
@@ -62,17 +52,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     private void initDBmessage(){
-        MessageDAO messageDao = new MessageDAO(this);
-        messageDao.openWritable();
-        messageDao.insert(home1);
-        messageDao.insert(home2);
-        messageDao.insert(home3);
-        messageDao.insert(home4);
-        messageDao.insert(work1);
-        messageDao.insert(work2);
-        messageDao.insert(work3);
-        messageDao.insert(work4);
-        messageDao.close();
+
+        Messages[] messages=getMessages();
+        if (messages.length!=0) {
+
+            Messages home1 = new Messages("Welcome Home ", 1, 0);
+            Messages home2 = new Messages("How was your day ", 1, 0);
+            Messages home3 = new Messages("I miss you ", 1, 0);
+            Messages home4 = new Messages("I'm so happy to see you ", 1, 0);
+            //Messages Home5=new Messages(,1,0);
+
+            Messages work1 = new Messages("Have a nice day at work ", 2, 0);
+            Messages work2 = new Messages("Good luck for your work", 2, 0);
+            Messages work3 = new Messages("I'm going to miss you", 2, 0);
+            Messages work4 = new Messages("Don't forget to eat ", 2, 0);
+            //Messages Work5=new Messages(,2,0);
+            MessageDAO messageDao = new MessageDAO(this);
+            messageDao.openWritable();
+            messageDao.insert(home1);
+            messageDao.insert(home2);
+            messageDao.insert(home3);
+            messageDao.insert(home4);
+            messageDao.insert(work1);
+            messageDao.insert(work2);
+            messageDao.insert(work3);
+            messageDao.insert(work4);
+            messageDao.close();
+        }
+        else{
+            return;
+        }
+    }
+    private Messages[] getMessages(){
+
+        MessageDAO dao=new MessageDAO(this);
+        dao.openReadable();
+        Messages[] messages=dao.getAll();
+        dao.close();
+        return messages;
     }
 
     @Override
